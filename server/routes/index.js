@@ -111,7 +111,30 @@ function report() {
           });
         }
       }
-      console.log(STATUS);
+      
+
+      let p = [];
+      imgs.items.map(img => {
+        p.push(fetch('http://p8jrba1ok.bkt.clouddn.com/' + encodeURIComponent(img.key) + '?qterror').then(t => t.json()));
+      });
+
+      Promise.all(p).then(t => {
+        console.log(imgs.items.length);
+        for(let i=0; i<imgs.items.length; i++) {
+          // console.log(e[i].result.label)
+          let user = imgs.items[i].key.split('/')[0];
+          if(t[i].result.label != 0){
+            let url = 'http://p8jrba1ok.bkt.clouddn.com/' + encodeURIComponent(imgs.items[i].key);
+            console.log(t[i].result.label)
+            console.log(url)
+            STATUS[user].find(e => e.url == url).label = 0;
+          }
+          
+        }
+      });
+
+      // console.log(STATUS);
+
     });
   });
 }

@@ -96,7 +96,7 @@ function showDetail(user, type) {
     data.map((datum,ind) => {
         tmp += `<tr>
                     <td>${ind+1}</td>
-                    <td><img src="${datum.url}" alt="" /></td>
+                    <td><a href="${datum.url}" target="_blank"><img src="${datum.url}" alt="" /></a></td>
                     <td>${new Date(datum.created)}</td>
                     <td>${datum.status}</td>
                 </tr>`
